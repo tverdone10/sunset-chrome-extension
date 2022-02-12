@@ -22,7 +22,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   console.log("hey")
 })
-
+let sunset;
 // 4. Set up our API call. 
 fetchSunsetTime = () => {
   fetch("https://api.sunrise-sunset.org/json?lat=34.0244&lng=-118.4075&date=today",{
@@ -32,7 +32,7 @@ fetchSunsetTime = () => {
     res.json() 
   .then( json => {
     console.log(json)
-    sunset = json.results
+    sunset = json.results.sunset
   })
   .catch(err => {
     console.log(err)
@@ -44,7 +44,12 @@ fetchSunsetTime = () => {
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   console.log("alarm", alarm)
+  let date = new Date()
+  
   console.log("sunset", sunset)
+  if (sunset) {
+    console.log("currengt time", date.toLocaleTimeString())
+    console.log(`sun sets at ${sunset}`)
+  }
   fetchSunsetTime()
-  console.log(thing)
 })
