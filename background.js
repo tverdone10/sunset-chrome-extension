@@ -2,6 +2,7 @@
 
 // 1. default set to 30 minutes. idk might make seconds depends on api res
 let minutesToSunset = 30;
+let sunset;
 
 // 2. Set the users settings on install to what we declared above
 chrome.runtime.onInstalled.addListener( () => {
@@ -22,7 +23,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   console.log("hey")
 })
-let sunset;
+
 // 4. Set up our API call. 
 fetchSunsetTime = () => {
   fetch("https://api.sunrise-sunset.org/json?lat=34.0244&lng=-118.4075&date=today",{
@@ -39,8 +40,6 @@ fetchSunsetTime = () => {
   })
 })
 }
-
-
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   console.log("alarm", alarm)
