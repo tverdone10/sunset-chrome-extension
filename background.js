@@ -48,7 +48,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   
   console.log("sunset", sunset)
   if (sunset) {
-    console.log("currengt time", date.toLocaleTimeString())
+    console.log("currengt time", date.toUTC("hh:mm:ss"))
     console.log(`sun sets at ${sunset}`)
   }
   fetchSunsetTime()
