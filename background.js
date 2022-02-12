@@ -1,8 +1,22 @@
 // background.ts
 
-let color = '#3aa757';
+let minutesToSunset = 30;
+
+console.log("hey")
+chrome.runtime.onInstalled.addListener( () => {
+  let userSettings = {
+    minutesToSunset
+  }
+  chrome.storage.sync.set(
+    { 'userSettings': userSettings },
+  () => {
+    console.log(`You'll be alerted ${minutesToSunset} minutes before the sun sets`)
+  })
+});
 
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.set({ color });
-    console.log('Default background color set to %cgreen', `color: ${color}`);
-  });
+  console.log("~on installed~")
+  chrome.alarms.create({periodInMinutes: 1})
+
+  console.log("hey")
+})
